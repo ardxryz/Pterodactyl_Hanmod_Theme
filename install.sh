@@ -56,16 +56,16 @@ clear
 
 installTheme(){
     cd /var/www/
-    tar -cvf Pterodactyl_Ardhita_Themebackup.tar.gz pterodactyl
+    tar -cvf Pterodactyl_Hanmod_Themebackup.tar.gz pterodactyl
     echo "Installing theme..."
     cd /var/www/pterodactyl
-    rm -r Pterodactyl_Ardhita_Theme
-    git clone https://github.com/ardxryz/Pterodactyl_Ardhita_Theme.git
-    cd Pterodactyl_Ardhita_Theme
-    rm /var/www/pterodactyl/resources/scripts/Pterodactyl_Ardhita_Theme.css
+    rm -r Pterodactyl_Hanmod_Theme
+    git clone https://github.com/ardxryz/Pterodactyl_Hanmod_Theme.git
+    cd Pterodactyl_Hanmod_Theme
+    rm /var/www/pterodactyl/resources/scripts/Pterodactyl_Hanmod_Theme.css
     rm /var/www/pterodactyl/resources/scripts/index.tsx
     mv index.tsx /var/www/pterodactyl/resources/scripts/index.tsx
-    mv Pterodactyl_Ardhita_Theme.css /var/www/pterodactyl/resources/scripts/Pterodactyl_Ardhita_Theme.css
+    mv Pterodactyl_Hanmod_Theme.css /var/www/pterodactyl/resources/scripts/Pterodactyl_Hanmod_Theme.css
     cd /var/www/pterodactyl
 
     curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -94,14 +94,14 @@ installThemeQuestion(){
 }
 
 repair(){
-    bash <(curl https://raw.githubusercontent.com/ardxryz/Pterodactyl_Ardhita_Theme/main/repair.sh)
+    bash <(curl https://raw.githubusercontent.com/ardxryz/Pterodactyl_Hanmod_Theme/main/repair.sh)
 }
 
 restoreBackUp(){
     echo "Restoring backup..."
     cd /var/www/
-    tar -xvf Pterodactyl_Ardhita_Themebackup.tar.gz
-    rm Pterodactyl_Ardhita_Themebackup.tar.gz
+    tar -xvf Pterodactyl_Hanmod_Themebackup.tar.gz
+    rm Pterodactyl_Hanmod_Themebackup.tar.gz
 
     cd /var/www/pterodactyl
     yarn build:production
