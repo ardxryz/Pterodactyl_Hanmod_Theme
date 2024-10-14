@@ -114,30 +114,35 @@ check_token
 
 while true; do
   clear
-echo -e "${BLUE}[+] =============================================== [+]${NC}"
-echo -e "${BLUE}[+]                     SELECT OPTION                    [+]${NC}"
-echo -e "${BLUE}[+] =============================================== [+]${NC}"
-echo -e "                                                       "
-echo -e "SELECT OPTION :"
-echo "1. Install theme"
-echo "2. Restore backup"
-echo "3. Repair panel (use if you have an error in the theme installation)"
-echo "x. Exit"
+  echo -e "                                                       "
+  echo -e "${BLUE}[+] =============================================== [+]${NC}"
+  echo -e "${BLUE}[+]                     SELECT OPTION                    [+]${NC}"
+  echo -e "${BLUE}[+] =============================================== [+]${NC}"
+  echo -e "                                                       "
+  echo "1. Install theme"
+  echo "2. Restore backup"
+  echo "3. Repair panel (use if you have an error in the theme installation)"
+  echo "x. Exit"
+  echo -e "Masukkan pilihan (1/2/x):"
+  read -r MENU_CHOICE
+  clear
 
-read -p "Please enter a number: " choice
-if [ $choice == "1" ]
-    then
-    installThemeQuestion
-fi
-if [ $choice == "2" ]
-    then
-    restoreBackUp
-fi
-if [ $choice == "3" ]
-    then
-    repair
-fi
-if [ $choice == "x" ]
-    then
-    exit
-fi
+  case "$MENU_CHOICE" in
+    1)
+      installThemeQuestion
+      ;;
+    2)
+      restoreBackUp
+      ;;
+    3)
+      repair
+      ;;
+    x)
+      echo "Keluar dari skrip."
+      exit 0
+      ;;
+    *)
+      echo "Pilihan tidak valid, silahkan coba lagi."
+      ;;
+  esac
+done
