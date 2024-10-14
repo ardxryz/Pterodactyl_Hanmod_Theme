@@ -1,52 +1,5 @@
 #!/bin/bash
 
-# Color
-BLUE='\033[0;34m'       
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
-
-# Display welcome message
-display_welcome() {
-  echo -e ""
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                                                 [+]${NC}"
-  echo -e "${BLUE}[+]                AUTO INSTALLER THEMA             [+]${NC}"
-  echo -e "${BLUE}[+]                  © HANMOD YT                [+]${NC}"
-  echo -e "${BLUE}[+]                                                 [+]${NC}"
-  echo -e "${RED}[+] =============================================== [+]${NC}"
-  echo -e ""
-  echo -e "script ini di buat untuk mempermudah penginstalasian thema pterodactyl,"
-  echo -e "dilarang keras untuk memperjual belikan."
-  echo -e ""
-  echo -e "𝗖𝗥𝗘𝗗𝗜𝗧𝗦 :"
-  echo -e "@Hanmod"
-  sleep 4
-  clear
-}
-
-#Check user token
-check_token() {
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                 LICENSY HANMOD YT                 [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                       "
-  TOKEN=$(jq -r '.token' token.json)
-
-  echo -e "${YELLOW}MASUKAN AKSES TOKEN :${NC}"
-  read -r USER_TOKEN
-
-  if [ "$USER_TOKEN" = "hanmodyt" ]; then
-    echo -e "${GREEN}AKSES BERHASIL${NC}}"
-  else
-    echo -e "${GREEN}Ini Thema Panel Pribadi Nya Hanmod Tau${NC}"
-    exit 1
-  fi
-  clear
-}
-
 if (( $EUID != 0 )); then
     echo "Please run as root"
     exit
@@ -107,42 +60,30 @@ restoreBackUp(){
     yarn build:production
     sudo php artisan optimize:clear
 }
+echo -e "${BLUE}[+] =============================================== [+]${NC}"
+echo -e "${BLUE}[+]                     SELECT OPTION                    [+]${NC}"
+echo -e "${BLUE}[+] =============================================== [+]${NC}"
+echo -e "                                                       "
+echo -e "SELECT OPTION :"
+echo "1. Install theme"
+echo "2. Restore backup"
+echo "3. Repair panel (use if you have an error in the theme installation)"
+echo "x. Exit"
 
-# Main script
-display_welcome
-check_token
-
-while true; do
-  clear
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                     SELECT OPTION                    [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                       "
-  echo "1. Install theme"
-  echo "2. Restore backup"
-  echo "3. Repair panel (use if you have an error in the theme installation)"
-  echo "x. Exit"
-  echo -e "Masukkan pilihan (1/2/x):"
-  read -r MENU_CHOICE
-  clear
-
-  case "$MENU_CHOICE" in
-    1)
-      installThemeQuestion
-      ;;
-    2)
-      restoreBackUp
-      ;;
-    3)
-      repair
-      ;;
-    x)
-      echo "Keluar dari skrip."
-      exit 0
-      ;;
-    *)
-      echo "Pilihan tidak valid, silahkan coba lagi."
-      ;;
-  esac
-done
+read -p "Please enter a number: " choice
+if [ $choice == "1" ]
+    then
+    installThemeQuestion
+fi
+if [ $choice == "2" ]
+    then
+    restoreBackUp
+fi
+if [ $choice == "3" ]
+    then
+    repair
+fi
+if [ $choice == "x" ]
+    then
+    exit
+fi
